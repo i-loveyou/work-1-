@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas03_放大镜</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			//绘制图像
+			var img = new Image();
+			img.src = "../Canvas02/img/1.jpg";
+			img.onload = function(){
+				content.drawImage(img,0,0,1000,500);
+			}
+			
+			canvas.onmousedown = function(){
+				//绑定鼠标移动事件
+				canvas.onmousemove = function(e){
+					//在移动的过程中不断地清空画布
+					content.clearRect(0,0,canvas.width,canvas.height);
+					//重新绘制
+					content.drawImage(img,0,0,1000,500);
+					var eve = e || event;
+					//获取鼠标的距离
+					var x = eve.offsetX;
+					var y = eve.offsetY;
+					
+					content.globalCompositeOperation = "destination-out";
+					
+					//绘制圆形
+					content.beginPath();
+					content.arc(x,y,100,0,2*Math.PI,false);
+					content.closePath();
+					content.fill();
+					
+					content.globalCompositeOperation = "destination-over";
+					
+					//描绘放大镜区域的图像
+					content.drawImage(img,x*2-100,y*2-100,200,200,x-100,y-100,200,200);
+					//还原图形的组合方法
+					content.globalCompositeOperation = "source-over";
+				}
+			}
+			
+			canvas.onmouseup = function(){
+				//鼠标左键抬起时置空移动事件
+				this.onmousemove = null;
+			}
+		</script>
+	</body>
+</html>

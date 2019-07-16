@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas02_小球碰撞</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			//随机数函数
+			function randomNumber(x,y){
+				return Math.floor(Math.random()*( y - x + 1 ) + x);
+			}
+			
+			//随机色函数
+			function randomColor(){
+				var r = randomNumber(0,255);
+				var g = randomNumber(0,255);
+				var b = randomNumber(0,255);
+				
+				return "rgb("+r+","+g+","+b+")";
+			}
+			
+			//创建小球的构造函数
+			function Ball(){
+				//半径
+				this.r = randomNumber(30,70);
+				//颜色
+				this.color = randomColor();
+				//位置
+				this.x = randomNumber(this.r,canvas.width - this.r);
+				this.y = randomNumber(this.r,canvas.height - this.r);
+				
+				//速度
+				this.speedX = randomNumber(2,6) * (randomNumber(0,10) > 5 ? 1 : -1);
+				this.speedY = randomNumber(2,6) * (randomNumber(0,10) > 5 ? 1 : -1);
+			}
+			
+			Ball.prototype.move = function(){
+				this.x += this.speedX;
+				this.y += this.speedY;
+				
+				//边界判断
+				
+				//左边界
+				if(this.x <= this.r){
+					//置反速度
+					this.speedX *= -1;
+				}
+				//右边界
+				if(this.x >= canvas.width - this.r){
+					this.speedX *= -1;
+				}
+				//上边界
+				if(this.y <= this.r){
+					this.speedY *= -1;
+				}
+				//下边界
+				if(this.y >= canvas.height - this.r){
+					this.speedY *= -1;
+				}
+			}
+			
+			//绘制小球的原型函数
+			Ball.prototype.drawBall = function(){
+				content.beginPath();
+				content.arc(this.x,this.y,this.r,0,Math.PI*2,false);
+				content.closePath();
+				content.fillStyle = this.color;
+				content.fill();
+			}
+			
+			//声明一个数组，存储所有创建的小球
+			var ballArray = [];
+			for(var i = 0;i < 5;i++){
+				var b = new Ball();
+				ballArray.push(b);
+			}
+			
+			requestBall();
+			function requestBall(){
+				//清空画布
+				content.clearRect(0,0,canvas.width,canvas.height);
+				//绘制小球
+				for(var i = 0;i < ballArray.length;i++){
+					ballArray[i].move();
+					ballArray[i].drawBall();
+					
+					//碰撞检测
+					for(var j = 0;j < ballArray.length;j++){
+						//如果取到相同的小球，跳过本次循环，继续判断下一次
+						if(ballArray[i] == ballArray[j]){
+							continue;
+						}
+						if(crash(ballArray[i],ballArray[j])){
+							//发生碰撞
+							//交换两个小球的速度
+							var tempX = ballArray[i].speedX;
+							ballArray[i].speedX = ballArray[j].speedX;
+							ballArray[j].speedX = tempX;
+							
+							var tempY = ballArray[i].speedY;
+							ballArray[i].speedY = ballArray[j].speedY;
+							ballArray[j].speedY = tempY;
+							
+							//交换彼此颜色
+						}
+					}
+				}
+				window.requestAnimationFrame(requestBall);
+			}
+			
+			
+			//碰撞检测的函数
+			function crash(ball1,ball2){
+				//计算两个球心之间的距离
+				var distance = Math.sqrt(Math.pow(ball1.x - ball2.x,2) + Math.pow(ball1.y - ball2.y,2));
+
+				if(ball1.r + ball2.r >= distance){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		</script>
+	</body>
+</html>

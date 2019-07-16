@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas08_反色</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<button onclick="invert()">反色</button>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			//3.反色
+			var img = new Image();
+			img.src = "img/1.jpg";
+			img.onload = function(){
+				content.drawImage(this,0,0,600,500);
+			}
+			
+			function invert(){
+				var imageData = content.getImageData(0,0,600,500);
+				//获取像素数组
+				var pixelArray = imageData.data;
+				
+				//遍历数组，将每个值进行反色处理，用255-当前值
+				for(var i = 0;i < pixelArray.length;i++){
+					pixelArray[i*4] = 255 - pixelArray[i*4];
+					pixelArray[i*4+1] = 255 - pixelArray[i*4+1];
+					pixelArray[i*4+2] = 255 - pixelArray[i*4+2];
+					pixelArray[i*4+3] = pixelArray[i*4+3];
+				}
+				
+				content.putImageData(imageData,0,0);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas06_贝塞尔曲线</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			//3.贝塞尔曲线
+			/*
+			 * 二次贝塞尔曲线  quadraticCurveTo(控制点x，控制点y，普通点x，普通点y)
+			 */
+			content.beginPath();
+			content.moveTo(188,169);
+			content.quadraticCurveTo(300,70,400,260);
+			content.stroke();
+			
+			
+			/*
+			 * 三次贝塞尔曲线
+			 */
+			content.beginPath();
+			content.moveTo(60,400);
+			content.bezierCurveTo(300,460,120,150,260,370);
+			content.stroke();
+		</script>
+	</body>
+</html>

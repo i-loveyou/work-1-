@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas02_全局阿尔法变量</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			//3
+			/*
+			 * 全局阿尔法变量  globalAlpha
+			 * 充当的是颜色值里透明度的计算基数，默认是1
+			 */
+			content.globalAlpha = 0.5;
+			content.fillStyle = "rgba(255,0,0,1)";
+			content.fillRect(100,100,200,200);
+		</script>
+	</body>
+</html>

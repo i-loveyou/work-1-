@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas03_画笔样式</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			/*
+			 * 3.canvas里样式分两种：
+			 * 		3.1 描边样式		带stroke单词的属性或者方法
+			 * 		3.2 填充样式		带fill单词的属性或方法
+			 */
+			
+			/*
+			 * 描边样式
+			 * 		strokeStyle		设置描边的样式
+			 * 			a.颜色：颜色单词，rgb/rgba，十六进制
+			 * 			b.渐变对象
+			 * 		stroke		描边方法
+			 */
+		
+			content.strokeStyle = "deepskyblue";
+			content.beginPath();
+			content.moveTo(200,200);
+			content.lineTo(300,300);
+			content.closePath();
+			content.stroke();
+			
+			/*
+			 * 填充样式
+			 * 		fillStyle	设置填充的样式
+			 * 			a.颜色值：颜色单词，rgb/rgba，十六进制
+			 * 			b.渐变对象
+			 * 		fill()	填充方法
+			 */
+			
+			content.strokeStyle = "deepskyblue";
+			content.fillStyle = "red";
+			content.beginPath();
+			content.moveTo(100,100);
+			content.lineTo(200,300);
+			content.lineTo(400,400);
+			content.closePath();	
+			content.stroke();
+			content.fill();
+			
+			/*
+			 * 设置过描边或者填充后，设置的样式会影响以后绘制的所有图像。
+			 */
+		</script>
+	</body>
+</html>

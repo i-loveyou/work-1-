@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas01_图形变换</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			//3
+			/*
+			 *  3.1 平移
+			 *  3.2 缩放
+			 *  3.3 旋转
+			 */
+			/*
+			 *  平移 translate(x，y)
+			 * 	x ： 坐标轴原点水平方向的平移值（正值向右，负值向左）
+			 * 	y ： 坐标轴原点竖直方向的平移值（正值向下，负值向上）
+			 */
+			
+//			content.fillStyle = "red";
+//			content.fillRect(100,100,200,100);
+//	
+//			content.translate(500,0);
+//			content.fillRect(100,100,200,100);
+
+			/*
+			 * 	缩放scale(x,y)
+			 * 	x : x轴的单位长度，表示水平方向缩放的倍数
+			 * 	y : y轴的单位长度，表示竖直方向缩放的倍数
+			 */
+//			content.fillStyle = "aqua";
+//			content.fillRect(100,100,100,100);
+//			
+//			content.scale(2,2);
+//			content.fillRect(100,100,100,100);
+			
+			/*
+			 *  旋转 rotate(弧度值)
+			 * 	弧度值： π = 180°   1弧度 = π/180°
+			 *  正值： 顺时针旋转
+			 * 	负值： 逆时针旋转
+			 * 	canvas里旋转影响的也是画布的坐标轴，不是元素的中心点
+			 */
+			content.fillStyle = "bisque";
+			content.fillRect(100,100,100,50);
+			
+			content.rotate(Math.PI/180*30);
+			content.fillRect(100,100,100,50);
+		</script>
+	</body>
+</html>

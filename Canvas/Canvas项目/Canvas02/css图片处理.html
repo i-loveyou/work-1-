@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>css图片处理</title>
+	</head>
+	<body>
+		<img src="img/1.jpg" alt="" />
+		<button>复古</button>
+		<button>饱和</button>
+		<button>高斯模糊</button>
+		<script type="text/javascript">
+			var img = document.querySelector("img");
+			
+			var btns = document.querySelectorAll("button");
+			
+			btns[0].onclick = function(){
+				//将图片转化成深褐色，取值范围0——1
+				img.style.webkitFilter = "sepia(0.5)";
+			}
+			
+			btns[1].onclick = function(){
+				img.style.webkitFilter = "saturate(0.5)";
+			}
+			
+			btns[2].onclick = function(){
+				img.style.webkitFilter = "blur(2px)";
+			}
+		</script>
+	</body>
+</html>

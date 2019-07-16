@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas10_渐变</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+
+			//3.
+			/*
+			 * 线性渐变 creatLinearGradient()
+			 * 放射渐变 creatRadialGradiebt()
+			 * 
+			 * 以上两个方法都会返回一个creatLinearGradient对象
+			 * 我们可以通过对该对象进行处理，实现渐变效果
+			 */
+			
+			/*
+			 * 线性渐变：creatLinearGradient(x0，y0，x1，y1)；
+			 * x0，y0：渐变的起点
+			 * x1，y1：渐变的终点
+			 */
+			var gObj = content.createLinearGradient(100,100,00,300);
+			/*
+			 * addColorStop(颜色的偏移值(取值范围0-1)，颜色值)
+			 */
+//			gObj.addColorStop(0,"red");
+//			gObj.addColorStop(0.25,"yellow");
+//			gObj.addColorStop(0.5,"blue");
+//			gObj.addColorStop(0.75,"green");
+//			gObj.addColorStop(1,"purple");
+			
+			content.fillStyle = gObj;
+//			content.fillRect(100,100,100,100);
+			
+			
+			content.font = "italic 70px 华文彩云";
+			content.fillText("中北大学",100,100);
+			
+			canvas.width = 1000;
+			canvas.height = 500;
+			
+			/*
+			 * 放射渐变
+			 *  creatRadialGradiebt(x0,y0,r0,x1,y1,r1);
+			 */
+			var rObj = content.createLinearGradient(0,0,0,390);		
+//			var rObj = content.createRadialGradient(500,250,10,500,250,100);
+			
+			rObj.addColorStop(0,"red");
+//			rObj.addColorStop(0.25,"yellow");
+//			rObj.addColorStop(0.5,"blue");
+//			rObj.addColorStop(0.75,"green");
+			rObj.addColorStop(1,"white");
+			
+			content.fillStyle = rObj;
+			
+			content.fillRect(0,0,1000,500);
+		</script>
+	</body>
+</html>

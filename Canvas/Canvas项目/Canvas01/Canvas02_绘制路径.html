@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas02_绘制路径</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			//3.绘制路径
+//			content.beginPath();   //开始路径
+//			content.moveTo(100,100);    //设置起点	
+//			content.lineTo(300,300);   //设置第二个点				
+//			content.closePath();   //闭合路径		
+//			content.stroke();		//描边方法，绘制路径
+			
+//			content.beginPath();
+//			content.moveTo(100,200);
+//			content.lineTo(400,400);
+//			content.closePath();
+//			content.stroke();		//注意：必须在画布内，超出范围不显示
+			
+			//绘制三角形
+//			content.beginPath();
+//			content.moveTo(100,100);
+//			content.lineTo(200,300);
+//			content.lineTo(400,400);
+//			content.closePath();	//注释掉最后不封口
+//			content.stroke();
+			
+			//绘制五角星
+			content.beginPath();
+			content.moveTo(300,200);
+			content.lineTo(400,100);
+			content.lineTo(250,100);
+			content.lineTo(400,200);
+			content.lineTo(300,50);
+			content.closePath();
+			content.stroke();
+		</script>
+	</body>
+</html>

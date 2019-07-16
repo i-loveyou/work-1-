@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas08_擦除方式</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+
+			//3.擦除方式
+			/*
+			 * 方式一 clearRect(x,y,w,h);
+			 * x,y:擦除的位置
+			 * w，h：擦除区域的大小
+			 */
+			content.beginPath();
+			content.arc(500,200,150,0,Math.PI*2,false);
+			content.closePath();
+			content.fillStyle = "#FF0000";
+			content.fill();
+			
+			//擦除
+			//content.clearRect(500,200,50,50);
+			
+			canvas.onmousedown = function(){
+				canvas.onmousemove = function(e){
+					var eve = e || event;
+					var earserX = eve.clientX - this.offsetLeft - 10;
+					var earserY = eve.clientY - this.offsetTop - 10;
+					content.clearRect(earserX,earserY,20,20);
+				}
+			}
+			
+			canvas.onmouseup = function(){
+				this.onmousemove = null;
+			}
+			
+			
+			/*
+			 * 方式二 ：
+			 * 重置canvas画布的宽和高
+			 */
+//			canvas.width = 1000;
+//			canvas.height = 500;
+			
+			content.clearRect(0,0,1000,500);
+			
+			
+			content.beginPath();
+			content.arc(500,200,150,0,Math.PI*2,false);
+			content.closePath();
+			content.fill();
+			
+			/*
+			 * 两种擦除方式的区别
+			 * 1.clearRect方法只会清空图像，设置的样式会保留。
+			 * 2.重置宽高的方法不但会清空图像，连设置的样式也会被重置。
+			 */
+		</script>
+	</body>
+</html>

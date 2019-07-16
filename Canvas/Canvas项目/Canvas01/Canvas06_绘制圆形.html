@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas06_绘制圆形</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			//3.绘制圆形
+			/*
+			 * arc(x,y,radius,startAngle,endAngle,anticlockwise)
+			 * 
+			 * x,y:圆心的位置
+			 * radius：半径
+			 * stratAngle，endAngle：开始弧度和结束弧度
+			 * anticlockwise:布尔值，是否逆时针绘制，默认是false（顺时针）
+			 * 
+			 * 弧度与角度的关系
+			 * 1弧度 = 180° / π;
+			 * π = 180°;
+			 * js里,Math.PI
+			 */
+			content.beginPath();
+			content.arc(500,250,100,Math.PI/2,Math.PI/2*3);
+			content.closePath();
+			content.stroke();
+		</script>
+	</body>
+</html>

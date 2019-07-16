@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas03_图形的组合方式</title>
+		<style type="text/css">
+			#Canvas{
+				display: block;
+				margin: 0 auto;
+				border: 1px solid tomato;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas" width="1000" height="500"></canvas>
+		<script type="text/javascript">
+			/*
+			 * Canvas在设置宽高时，建议设置其宽高的属性，而不要通过css样式设置宽高
+			 */
+			//1.获取canvas元素
+			var canvas = document.getElementById("Canvas");
+			
+			//2.获取2d渲染上下文 	对象,该对象用于图像的绘制
+			var content = canvas.getContext("2d");		
+			
+			//3
+			/*
+			 * globalCompositeOperation	图形的组合方式
+			 * 
+			 * 两个概念：
+			 * 1. 源图像(source) ：新绘制的图像
+			 * 2. 目的图像(destination) ：已经绘制的图像
+			 * 
+			 * 属性值：
+			 * 1.source		默认值，源在目的上
+			 * 2.destination-over	目的在源上
+			 * 3.source-atop	绘制目的以及源与目的重合的部分，其余部分透明（源在目的上）
+			 * 4.destination-atop	绘制源以及源与目的重合的部分，其余部分透明（目的在源上）
+			 * 5.source-in		绘制重合部分的源
+			 * 6.destination-in		绘制重合部分的目的
+			 * 7.source-out		绘制不重合部分的源
+			 * 8.destination-out	绘制不重合部分的目的
+			 * 9.lighter	重叠部分颜色混合（对应位置rgb相加，大于255就取255，其余部分正常绘制）
+			 * 10.copy		只绘制源
+			 * 11.xor		只绘制不重合的部分，重合部分透明
+			 */
+			
+			content.fillStyle = "red";
+			content.beginPath();
+			content.arc(100,100,100,0,Math.PI*2);
+			content.closePath();
+			content.fill();
+			
+			//设置图形的组合方式
+			content.globalCompositeOperation = "copy";
+			
+			content.fillStyle = "blue";
+			content.beginPath();
+			content.arc(200,200,150,0,Math.PI*2);
+			content.closePath();
+			content.fill();
+		</script>
+	</body>
+</html>
